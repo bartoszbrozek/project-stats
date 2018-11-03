@@ -2,17 +2,15 @@
     <form @submit.prevent="onSubmit">
         <span class="help is-danger" v-text="errors"></span>
 
-        <div class="field">
-            <div class="control">
-                <input class="input" type="text" placeholder="Enter Project Name" v-model="project.name"
+        <div class="form-group">
+                <input class="form-control" type="text" placeholder="Enter Project Name" v-model="project.name"
                        @keydown="errors = ''">
 
-                <input class="input" type="text" placeholder="Enter Directory" v-model="project.directory"
+                <input class="form-control" type="text" placeholder="Enter Directory" v-model="project.directory"
                        @keydown="errors = ''">
-            </div>
         </div>
 
-        <button class="button is-primary" v-bind:class="{ 'is-loading' : isLoading }">Add Project</button>
+        <button class="btn btn-success" v-bind:class="{ 'is-loading' : isLoading }">Add Project</button>
     </form>
 </template>
 
