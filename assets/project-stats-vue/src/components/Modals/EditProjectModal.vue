@@ -71,11 +71,6 @@
                 }).catch(e => {
                     this.errors = e.toString()
                 })
-            },
-            setData(data) {
-
-                this.project = data
-                console.log(this.project)
             }
         }
     }

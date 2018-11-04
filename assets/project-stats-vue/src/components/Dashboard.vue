@@ -21,17 +21,17 @@
 
             </nav>
 
-            <router-view></router-view>
+
         </div>
+        <router-view></router-view>
     </section>
+
 </template>
 
 <script>
     export default {
         data: function () {
-            return {
-                authenticated: false
-            }
+            return {}
         },
         methods: {}
     }

@@ -56,7 +56,7 @@
                 projects: {},
                 isLoading: true,
                 countUpdatingTable: [],
-                project: {id:"525"}
+                project: {id:""}
             }
         },
         async created() {
@@ -65,7 +65,7 @@
                 this.projects = response.data
                 this.isLoading = false
             } catch (e) {
-
+                this.errors = e.toString()
             }
         },
         methods: {

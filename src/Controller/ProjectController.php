@@ -140,10 +140,9 @@ class ProjectController extends AbstractController
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param EntityManagerInterface $em
-     * @param JsonHelper $jsonHelper
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function remove(int $id, Request $request, ProjectRepository $projectRepository, EntityManagerInterface $em, JsonHelper $jsonHelper)
+    public function remove(int $id, Request $request, ProjectRepository $projectRepository, EntityManagerInterface $em)
     {
         try {
             $project = $projectRepository->find($id);
