@@ -23,6 +23,9 @@
                     <td>{{ project.directory }}</td>
                     <td>{{ project.created_at }}</td>
                     <td>
+                        <router-link :to="{ name: 'statistics', params: { id: project.id }}" class="btn btn-success">
+                            Show
+                        </router-link>
                         <button type="button" class="btn btn-primary" @click="openModal(project.id)">
                             Edit
                         </button>
@@ -56,7 +59,7 @@
                 projects: {},
                 isLoading: true,
                 countUpdatingTable: [],
-                project: {id:""}
+                project: {id: ""}
             }
         },
         async created() {

@@ -106,6 +106,14 @@ class ProjectManager
         return $this->errors;
     }
 
+    /**
+     * @param int $projectid
+     * @param string $filename
+     * @param string $dir
+     * @param int $filesize
+     * @param int $numberOfLines
+     * @param string $status
+     */
     public function saveFileDetails(int $projectid, string $filename, string $dir, int $filesize, int $numberOfLines, string $status = "OK")
     {
         $project = $this->projectRepository->find($projectid);

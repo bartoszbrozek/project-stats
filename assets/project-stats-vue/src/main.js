@@ -7,10 +7,12 @@ Vue.use(VueRouter);
 
 import Dashboard from './components/Dashboard.vue';
 import ProjectList from './components/ProjectList.vue';
+import Statistics from './components/Statistics.vue';
 
 const routes = [
-    { path: '/', component: Dashboard },
-    { path: '/project/list', component: ProjectList }
+    {path: '/', component: Dashboard},
+    {path: '/project/list', component: ProjectList},
+    {path: '/project/:id/statistics', component: Statistics, name: 'statistics', props: true}
 ];
 
 const router = new VueRouter({
