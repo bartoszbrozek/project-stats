@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class StatisticsController extends AbstractController
 {
     /**
-     * @Route("/dirstats/{id}/show", name="showProject")
+     * @Route("/dirstats/{id}/show", name="showDirStats")
      * @Method("GET")
      * @param int $id
      * @param DirStatsRepository $dirStatsRepository
@@ -31,6 +31,46 @@ class StatisticsController extends AbstractController
 
         return $this->json(
             $dirStats
+        )->setStatusCode(200);
+    }
+
+    /**
+     * @Route("/dirstats/{id}/show/{scanid}", name="showDirStatsByScanId")
+     * @Method("GET")
+     * @param int $id
+     * @param DirStatsRepository $dirStatsRepository
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function showByScanId(int $id, string $scanid, DirStatsRepository $dirStatsRepository)
+    {
+        $dirStats = $dirStatsRepository->findByProjectIdAndScanId($id, $scanid);
+
+        if (!$dirStats) {
+            return $this->json(["Object not found."])->setStatusCode(404);
+        }
+
+        return $this->json(
+            $dirStats
+        )->setStatusCode(200);
+    }
+
+    /**
+     * @Route("/dirstats/scanid/{projectid}/get", name="getScanIdsByProjectId")
+     * @Method("GET")
+     * @param int $projectid
+     * @param DirStatsRepository $dirStatsRepository
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getScanIds(int $projectid, DirStatsRepository $dirStatsRepository)
+    {
+        $scanIds = $dirStatsRepository->findScanIdsByProjectId($projectid);
+
+        if (!$scanIds) {
+            return $this->json(["Object not found."])->setStatusCode(404);
+        }
+
+        return $this->json(
+            $scanIds
         )->setStatusCode(200);
     }
 }

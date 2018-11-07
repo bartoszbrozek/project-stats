@@ -5,6 +5,27 @@
         <table class="table">
             <thead>
             <tr>
+                <th>Scan ID</th>
+                <th>Created At</th>
+            </tr>
+            </thead>
+            <tbody>
+            <template v-for="scan in scanids">
+                <tr v-bind:key="scan.id">
+                    <td>
+                        <button class="btn btn-primary" @click="getDirStats(scan.scanid)">
+                            Get {{scan.scanid}}
+                        </button>
+                    </td>
+                    <td>{{ scan.created_at.date }}</td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+            <tr>
                 <th>ID</th>
                 <th>Directory</th>
                 <th>Filename</th>
@@ -38,18 +59,29 @@
         props: ['id'],
         data: function () {
             return {
-                dirStats: {}
+                dirStats: {},
+                scanids: {}
             }
         },
         async created() {
-            axios.get(consts.SERVER + "dirstats/" + this.id + "/show",
+            axios.get(consts.SERVER + "dirstats/scanid/" + this.id + "/get",
             ).then(response => {
                 console.log(response)
-                this.dirStats = response.data
+                this.scanids = response.data
             }).catch(e => {
                 console.log(e.toString())
             })
         },
-        methods: {}
+        methods: {
+            getDirStats(scanid) {
+                axios.get(consts.SERVER + "dirstats/" + this.id + "/show/" + scanid,
+                ).then(response => {
+                    console.log(response)
+                    this.dirStats = response.data
+                }).catch(e => {
+                    console.log(e.toString())
+                })
+            }
+        }
     }
 </script>

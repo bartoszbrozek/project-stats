@@ -30,10 +30,33 @@ class DirStatsRepository extends ServiceEntityRepository
 
     public function findByProjectId(int $projectid)
     {
-      return $this->createQueryBuilder('d')
-          ->select("d.id, d.relativeDirectory, d.filename, d.filesize, d.numberOfLines, d.created_at")
-          ->where("d.projectid = :projectid")
-          ->setParameter("projectid", $projectid)
-          ->getQuery()->execute();
+        return $this->createQueryBuilder('d')
+            ->select("d.id, d.relativeDirectory, d.filename, d.filesize, d.numberOfLines, d.created_at")
+            ->where("d.projectid = :projectid")
+            ->setParameter("projectid", $projectid)
+            ->getQuery()->execute();
+    }
+
+    public function findScanIdsByProjectId(int $projectid)
+    {
+        return $this->createQueryBuilder('d')
+            ->select("d.scanid, d.created_at")
+            ->where("d.projectid = :projectid")
+            ->groupBy("d.scanid")
+            ->orderBy("d.id", "desc")
+            ->setParameter("projectid", $projectid)
+            ->getQuery()->execute();
+    }
+
+    public function findByProjectIdAndScanId(int $projectid, string $scanid)
+    {
+        return $this->createQueryBuilder('d')
+            ->select("d.id, d.relativeDirectory, d.filename, d.filesize, d.numberOfLines, d.created_at")
+            ->where("d.projectid = :projectid")
+            ->andWhere("d.scanid = :scanid")
+            ->orderBy("d.id", "asc")
+            ->setParameter("projectid", $projectid)
+            ->setParameter("scanid", $scanid)
+            ->getQuery()->execute();
     }
 }
